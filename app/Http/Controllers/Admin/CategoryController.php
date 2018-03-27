@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Category;
+use File;
 
 class CategoryController extends Controller
 {
@@ -33,7 +34,21 @@ class CategoryController extends Controller
 
         $this -> validate($request, $rules, $messages);
 
-        Category::create($request->all()); //Asignacion masiva
+        $category = Category::create($request->only('name', 'description')); //Asignacion masiva
+
+        if($request->hasFile('image')){
+            //Guardar foto en el proyecto
+            $file = $request->file('image');
+            $path = public_path() . '/images/categories';
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $moved = $file->move($path, $fileName);
+
+            //Crear registro en la bd de la categoria con imagen
+            if($moved){
+                $category->image= $fileName;
+                $category->save();
+            }        
+        }
 
 
         return redirect('/admin/categories');
@@ -55,7 +70,26 @@ class CategoryController extends Controller
         ];
 
         $this->validate($request, $rules, $messages);
-        $category->update($request->all());
+        $category->update($request->only('name', 'description'));
+
+        if($request->hasFile('image')){
+            //Guardar foto en el proyecto
+            $file = $request->file('image');
+            $path = public_path() . '/images/categories';
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $moved = $file->move($path, $fileName);
+
+            //Crear registro en la bd de la categoria con imagen
+            if($moved){
+                $previousPath = $path . '/' . $category->image;
+
+                $category->image= $fileName;
+                $saved = $category->save(); //update
+
+                if($saved)
+                    File::delete($previousPath);
+            }        
+        }
 
         return redirect('/admin/categories');
     }

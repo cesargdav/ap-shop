@@ -109,7 +109,7 @@
         </div>
 
 
-        <div class="section landing-section">
+        <!--<div class="section landing-section">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h2 class="text-center title">¿Mas información?</h2>
@@ -119,7 +119,7 @@
                             <div class="col-md-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Nombre</label>
-                                    <input type="email" class="form-control">
+                                    <input type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -130,15 +130,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group label-floating">
-                            <label class="control-label">Mensaje</label>
-                            <textarea class="form-control" rows="4"></textarea>
-                        </div>
-
                         <div class="row">
                             <div class="col-md-4 col-md-offset-4 text-center">
                                 <button class="btn btn-primary btn-raised">
-                                    Enviar mensaje
+                                    Iniciar Registro
                                 </button>
                             </div>
                         </div>
@@ -146,7 +141,7 @@
                 </div>
             </div>
 
-        </div>
+        </div>-->
     </div>
 
 </div>

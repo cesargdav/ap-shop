@@ -22,13 +22,19 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ url('/admin/categories') }}">
+            <form method="POST" action="{{ url('/admin/categories') }}" enctype="multipart/form-data">
             @csrf
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group label-floating">
                             <label class="control-label">Nombre de la categoría</label>
                             <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="label-floating">
+                            <label class="control-label">Imágen de la categoría</label>
+                            <input type="file" name="image">
                         </div>
                     </div>
                 </div>
