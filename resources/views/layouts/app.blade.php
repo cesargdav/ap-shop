@@ -7,7 +7,7 @@
 	<link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>@yield('title', 'D-Supplier')</title>
+	<title>@yield('title', config('app.name'))</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -34,7 +34,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ url('/') }}">D-Supplier</a>
+				<a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="navigation-example">
@@ -54,6 +54,9 @@
 								@if(auth()->user()->admin)
 									<a class="dropdown-item" href="{{ url('/admin/products') }}">
 									Gestionar producto
+									</a>
+									<a class="dropdown-item" href="{{ url('/admin/categories') }}">
+									Gestionar categorías
 									</a>
 								@endif
 								<br>	
@@ -108,5 +111,7 @@
 
 	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
 	<script src="{{ asset('js/material-kit.js') }}" type="text/javascript"></script>
+
+	@yield('scripts')
 
 </html>

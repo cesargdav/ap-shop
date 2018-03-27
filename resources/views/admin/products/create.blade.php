@@ -38,19 +38,35 @@
                             <input type="number" name="price" class="form-control" value="{{ old('price') }}">
                         </div>
                     </div>
-                </div>                
+                </div> 
 
-                    <div class="form-group label-floating">
-                        <label class="control-label">Descripcion corta del producto</label>
-                        <input type="text" name="description" class="form-control" value="{{ old('description') }}">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Descripcion corta del producto</label>
+                            <input type="text" name="description" class="form-control" value="{{ old('description') }}">
+                        </div>
                     </div>
-
+                    
+                    <div class="col-sm-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Categoría del producto</label>
+                            <select name="category_id" id="" class="form-control">
+                                <option value="0">General</option>
+                                @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
                     <div class="form-group label-floating">
                         <label class="control-label">Descripcion extensa del producto</label>
                         <textarea class="form-control" rows="5" name="long_description">{{ old('long_description') }}</textarea>
                     </div>
                 <button class="btn btn-primary">Guardar producto</button>
+                <a href="{{ url('/admin/products') }}" class="btn btn-default">Cancelar</a>
 
             </form>
         </div>

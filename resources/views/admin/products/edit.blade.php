@@ -39,12 +39,28 @@
                             <input type="number" step="0.01" name="price" class="form-control" value="{{ old('price', $product->price) }}">
                         </div>
                     </div>
-                </div>                
+                </div>
 
-                    <div class="form-group label-floating">
-                        <label class="control-label">Descripcion corta</label>
-                        <input type="text" name="description" class="form-control" value="{{ old('description', $product->description) }}">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Descripcion corta del producto</label>
+                            <input type="text" name="description" class="form-control" value="{{ old('description', $product->description) }}">
+                        </div>
                     </div>
+                    
+                    <div class="col-sm-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Categoría del producto</label>
+                            <select name="category_id" id="" class="form-control">
+                                <option value="0">General</option>
+                                @foreach($categories as $category)
+                                <option value="{{ $category->id }}" @if($category->id == old('category_id', $product->category_id)) selected @endif>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
 
                     <div class="form-group label-floating">

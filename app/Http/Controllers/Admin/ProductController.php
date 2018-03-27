@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,8 @@ class ProductController extends Controller
     }
 
     public function create(){
-        return view('admin.products.create');
+        $categories = Category::orderBy('name')->get();
+        return view('admin.products.create')->with(compact('categories'));
     }
 
     public function store(Request $request){
@@ -32,8 +34,8 @@ class ProductController extends Controller
 
         $rules=[
             'name' => 'required|min:5',
-            'description' => 'required|min:50',
-            'long_description' => 'required|min:200',
+            'description' => 'required|min:20',
+            'long_description' => 'required|min:50',
             'price' => 'required|numeric|min:0'
         ];
         $this -> validate($request, $rules, $messages);
@@ -44,14 +46,16 @@ class ProductController extends Controller
         $product -> description = $request -> input('description');
         $product -> price = $request -> input('price');
         $product -> long_description = $request -> input('long_description');
+        $product -> category_id = $request->category_id;
         $product -> save();
 
         return redirect('/admin/products');
     }
 
     public function edit($id){
+        $categories = Category::orderBy('name')->get();
         $product = Product::find($id);
-        return view('admin.products.edit')->with(compact('product'));
+        return view('admin.products.edit')->with(compact('product', 'categories'));
     }
 
     public function update(Request $request, $id){
@@ -68,8 +72,8 @@ class ProductController extends Controller
 
         $rules=[
             'name' => 'required|min:5',
-            'description' => 'required|min:50',
-            'long_description' => 'required|min:200',
+            'description' => 'required|min:20',
+            'long_description' => 'required|min:50',
             'price' => 'required|numeric|min:0'
         ];
         $this -> validate($request, $rules, $messages);
@@ -80,6 +84,7 @@ class ProductController extends Controller
         $product -> description = $request -> input('description');
         $product -> price = $request -> input('price');
         $product -> long_description = $request -> input('long_description');
+        $product -> category_id = $request->category_id;
         $product -> save();
 
         return redirect('/admin/products');
