@@ -16,11 +16,13 @@ class UserTableSeeder extends Seeder
             'name' => 'César Gutiérrez',
             'email' => 'c.davalos@demonsystem.com',
             'password' => bcrypt('cesar20894'),
-            'admin' => true,
+            'admin' => true
+        ],
+        [
             'name' => 'Ventas demon',
             'email' => 'ventas@demonsystem.com',
             'password' => bcrypt('ventas2018'),
-            'admin' => true
+            'admin' => true            
         ]);
     }
 }
